@@ -7,7 +7,7 @@
     </div>
     <div class="container my-2">
 
-        <form action="{{ route('admin.projects.update'), $project->id }}" method="post">
+        <form action="{{ route('admin.projects.update', $project) }}" method="post">
             @csrf
             @method('PUT')
             <div class="d-flex justify-content-center mb-2">
