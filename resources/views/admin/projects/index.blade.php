@@ -1,6 +1,13 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container">
+    <div class="junbotron bg-dark text-white p-3 d-flex align-items-center justify-content-between">
+        <h1>Project</h1>
+        <a class="btn btn-primary " href="{{ route('admin.projects.create') }}"><i class="fa-solid fa-plus"></i> Create</a>
+
+    </div>
+
+
+    <div class="container mt-3">
         <div class="table-responsive">
             <table class="table table-light">
                 <thead>
@@ -20,6 +27,9 @@
                             <td><img width="150" src="{{ $project->cover_image }}" alt=""></td>
                             <td>
                                 <a href="{{ route('admin.projects.show', $project) }}">View</a>
+                                <a href="{{ route('admin.projects.edit', $project) }}">Edit</a>
+                                <a href="{{ route('admin.projects.show', $project) }}">Delet</a>
+
                             </td>
 
                         </tr>
