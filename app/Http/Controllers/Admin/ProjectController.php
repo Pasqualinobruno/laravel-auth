@@ -6,7 +6,8 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -32,9 +33,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $val_data = $request->validate();
+        //dd($request->all());
+        //validazione dei dati
+        $val_data = $request->validated();
+
+        $val_data['cover_image'] = Storage::put('uploads', $request->cover_image);
+        //dd($val_data);
+        //creazione
         Project::create($val_data);
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('message', 'Project Created successfully');
     }
 
     /**
@@ -59,9 +66,22 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         //dd($request->all());
+        //valido i dati
         $val_data = $request->validated();
+
+        //aggiorno l'immagine
+        if ($request->has('cover_image')) {
+
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+            $image_path =  Storage::put('uploads', $request->cover_image);
+            $val_data['cover_image'] = $image_path;
+        }
+        dd($val_data);
+        //aggiorno i dati
         $project->update($val_data);
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('message', 'Post Update successfully');
     }
 
     /**
@@ -69,6 +89,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        if ($project->cover_image && !Str::startsWith($project->cover_image, 'https://')) {
+            Storage::delete($project->cover_image);
+        }
+        $project->delete();
+        return to_route('admin.projects.index')->with('message', 'Project deleted correctly');
     }
 }
