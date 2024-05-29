@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['projects' => Project::orderByDesc('id')->take(3)->get()]);
 });
+
+
+Route::get('projects', function () {
+    return view('guest.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
+})->name('guest.projects.index');
+
+Route::get('projects/{project}', function (Project $project) {
+    return view('guest.projects.show', compact('project'));
+})->name('guest.projects.show');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('admin')

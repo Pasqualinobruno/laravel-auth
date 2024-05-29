@@ -6,7 +6,7 @@
         <a class="btn btn-primary" href="{{ route('admin.projects.index') }}">Back</a>
     </div>
     <div class="container my-2">
-
+        @include('partials.error')
         <form action="{{ route('admin.projects.update', $project) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')

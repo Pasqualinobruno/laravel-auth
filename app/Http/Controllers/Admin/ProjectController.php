@@ -78,7 +78,7 @@ class ProjectController extends Controller
             $image_path =  Storage::put('uploads', $request->cover_image);
             $val_data['cover_image'] = $image_path;
         }
-        dd($val_data);
+        //dd($val_data);
         //aggiorno i dati
         $project->update($val_data);
         return to_route('admin.projects.index')->with('message', 'Post Update successfully');
