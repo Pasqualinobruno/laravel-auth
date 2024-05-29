@@ -11,7 +11,7 @@
                         Welcome to my project
                     </h1>
                     <p class="col-md-8 fs-4">This a preset package with my project</p>
-                    <a href="{{ route('') }}" class="btn btn-primary btn-lg" type="button">Projects</a>
+                    <a href="" class="btn btn-primary btn-lg" type="button">Projects</a>
                 </div>
             </div>
         </div>

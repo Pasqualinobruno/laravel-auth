@@ -28,6 +28,7 @@ Route::get('projects', function () {
 })->name('guest.projects.index');
 
 Route::get('projects/{project}', function (Project $project) {
+    //dd($project);
     return view('guest.projects.show', compact('project'));
 })->name('guest.projects.show');
 
