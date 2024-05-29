@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -25,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        return view('admin.projects.create', ['types' => Type::all()]);
     }
 
     /**
@@ -38,7 +39,7 @@ class ProjectController extends Controller
         $val_data = $request->validated();
 
         $val_data['cover_image'] = Storage::put('uploads', $request->cover_image);
-        //dd($val_data);
+        dd($val_data);
         //creazione
         Project::create($val_data);
         return to_route('admin.projects.index')->with('message', 'Project Created successfully');
@@ -57,7 +58,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -80,6 +82,7 @@ class ProjectController extends Controller
         }
         //dd($val_data);
         //aggiorno i dati
+
         $project->update($val_data);
         return to_route('admin.projects.index')->with('message', 'Post Update successfully');
     }

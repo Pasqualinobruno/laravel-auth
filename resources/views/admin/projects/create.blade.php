@@ -20,6 +20,22 @@
             </div>
 
             <div class="mb-3">
+                <label for="type_id" class="form-label">Type</label>
+                <select class="form-select " name="type_id" id="type_id">
+                    <option selected>Select one</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == old('type_id') ? 'selected' : '' }}>
+                            {{ $type->name }}</option>
+                    @endforeach
+                    @error('type_id')
+                        <div class="text-damger">{{ $message }}</div>
+                    @enderror
+
+
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label for="cover_image" class="form-label">Choose file</label>
                 <input type="file" class="form-control" name="cover_image" id="cover_image"
                     aria-describedby="coverImageHelper" />
