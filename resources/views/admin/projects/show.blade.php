@@ -11,6 +11,7 @@
                         <h3>Title</h3>
                         <div>{{ $project->title }}</div>
                         <div class="metadata">
+
                             <strong>Type:</strong> {{ $project->type ? $project->type->name : 'Not Type' }}
                         </div>
                     </li>
