@@ -35,6 +35,17 @@
                 </select>
             </div>
 
+            <div class="mb-3 d-flex gap-3">
+                @foreach ($tecnologies as $tecnology)
+                    <div class="form-check ">
+                        <input class="form-check-input" type="checkbox" value="{{ $tecnology->id }}"
+                            id="tecnology-{{ $tecnology->id }}" name="tecnologies[]" />
+                        <label class="form-check-label" for="tecnology-{{ $tecnology->id }}"> {{ $tecnology->name }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+
             <div class="mb-3">
                 <label for="cover_image" class="form-label">Choose file</label>
                 <input type="file" class="form-control" name="cover_image" id="cover_image"
