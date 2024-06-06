@@ -29,6 +29,7 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         $tecnologies = Tecnoligy::all();
+        //dd($tecnologies);
         return view('admin.projects.create', compact('types', 'tecnologies'));
     }
 
@@ -37,7 +38,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         //validazione dei dati
         $val_data = $request->validated();
 

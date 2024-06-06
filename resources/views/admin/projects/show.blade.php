@@ -13,7 +13,13 @@
                         <div class="metadata">
 
                             <strong>Type:</strong> {{ $project->type ? $project->type->name : 'Not Type' }}
+
+                            <h3>Technologies:</h3>
+                            <ul>
+                                {{ $tecnoligies->name }}
+                            </ul>
                         </div>
+
                     </li>
                     <li class="list-group-item py-4">
                         <h3>Content</h3>
